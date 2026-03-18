@@ -1,15 +1,11 @@
 import styles from './Heading.module.css'
 
 interface HeadingProps {
-    primaryTitle?: string;
-    secondTitle?: string
+    children: React.ReactNode
 }
 
-export default function Heading({ primaryTitle, secondTitle }: HeadingProps) {
+export default function Heading({ children }: HeadingProps) {
     return (
-        <div className={styles.container}>
-            <h1>{primaryTitle}</h1>
-            <h1>{secondTitle}</h1>
-        </div>
+        <h1 className={styles.heading}>{children}</h1>
     );
 }
