@@ -1,19 +1,19 @@
 import "./styles/theme.css";
 import "./styles/global.css";
-import styles from "./App.module.css"
-
+import { Container } from "./components/Container";
 import Heading from "./components/Heading";
-import { TimerIcon } from "lucide-react";
+import { Logo } from "./components/Logo";
+import { Menu } from "./components/Menu";
 
 function App() {
   return (
     <>
-      <Heading>
-        Chronos Pomodoro
-        <button>
-          <TimerIcon />
-        </button>
-      </Heading>
+      <Container>
+        <Logo />
+      </Container>
+      <Container>
+        <Menu />
+      </Container>
     </>
   );
 }
