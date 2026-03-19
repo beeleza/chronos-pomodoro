@@ -1,4 +1,5 @@
-import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from "lucide-react";
+// Menu/index.tsx
+import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon, MoonIcon } from "lucide-react";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,6 @@ export function Menu() {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     e.preventDefault();
-
     setTheme((prevTheme) => {
       const nextTheme = prevTheme === "dark" ? "light" : "dark";
       return nextTheme;
@@ -29,12 +29,16 @@ export function Menu() {
   return (
     <nav className={styles.menu}>
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} ${styles.active}`}
         href="#"
         aria-label="Ir para a Home"
         title="Ir para a Home"
       >
-        <HouseIcon />
+        <div className={styles.linkContent}>
+          <HouseIcon />
+          <span className={styles.linkTooltip}>Home</span>
+        </div>
+        <div className={styles.linkGlow}></div>
       </a>
 
       <a
@@ -43,7 +47,11 @@ export function Menu() {
         aria-label="Ver histórico"
         title="Ver histórico"
       >
-        <HistoryIcon />
+        <div className={styles.linkContent}>
+          <HistoryIcon />
+          <span className={styles.linkTooltip}>Histórico</span>
+        </div>
+        <div className={styles.linkGlow}></div>
       </a>
 
       <a
@@ -52,17 +60,27 @@ export function Menu() {
         aria-label="Configurações"
         title="Configurações"
       >
-        <SettingsIcon />
+        <div className={styles.linkContent}>
+          <SettingsIcon />
+          <span className={styles.linkTooltip}>Configurações</span>
+        </div>
+        <div className={styles.linkGlow}></div>
       </a>
 
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} ${styles.themeToggle}`}
         href="#"
         aria-label="Mudar tema"
-        title="Mudar tema"
+        title={`Mudar para tema ${theme === "dark" ? "claro" : "escuro"}`}
         onClick={handleThemeChange}
       >
-        <SunIcon />
+        <div className={styles.linkContent}>
+          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          <span className={styles.linkTooltip}>
+            {theme === "dark" ? "Tema claro" : "Tema escuro"}
+          </span>
+        </div>
+        <div className={styles.linkGlow}></div>
       </a>
     </nav>
   );

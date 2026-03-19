@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.4rem;
-  padding-top: 3.2rem;
+  padding: 2rem 0;
+  position: relative;
 }
 
 .logoLink {
@@ -11,19 +11,140 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  gap: 0.4rem;
-  font-size: 4.2rem;
+  gap: 0.8rem;
   text-decoration: none;
-  color: var(--primary);
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .logoLink:hover {
-  filter: brightness(80%);
+  transform: translateY(-2px);
 }
 
-.logoLink svg {
-  width: 6.4rem;
-  height: 6.4rem;
+.logoIcon {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-700) 100%);
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  box-shadow: 
+    0 10px 20px -10px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.logoLink:hover .logoIcon {
+  border-color: var(--primary-light);
+  box-shadow: 
+    0 15px 30px -10px rgba(13, 161, 112, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.logoIcon svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.logoLink:hover .logoIcon svg {
+  color: var(--primary-light);
+  transform: scale(1.1);
+}
+
+.logoGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.logoLink:hover .logoGlow {
+  opacity: 0.2;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.logoText {
+  font-size: 3.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.logoText::before,
+.logoText::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.logoText::before {
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.logoText::after {
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.logoLink:hover .logoText::before,
+.logoLink:hover .logoText::after {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--primary-light);
+}
+
+/* Animações */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.logoLink:active {
+  transform: scale(0.98);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .logoIcon {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .logoIcon svg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .logoText {
+    font-size: 2.4rem;
+  }
 }

@@ -2,26 +2,194 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.6rem;
+  gap: 1.2rem;
+  padding: 1rem;
+  background: var(--gray-800);
+  border-radius: 2rem;
+  border: 1px solid var(--gray-600);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  backdrop-filter: blur(10px);
 }
 
 .menuLink {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  background: var(--primary);
-  color: var(--text-over-primary);
-  transition: all 0.1s ease-in-out;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 1.2rem;
-  border-radius: 0.8rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.menuLink:hover {
-  filter: brightness(80%);
+.linkContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .menuLink svg {
   width: 2.4rem;
   height: 2.4rem;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de glow no hover */
+.linkGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: all 0.4s ease;
+  z-index: 1;
+  border-radius: 1.2rem;
+}
+
+.menuLink:hover .linkGlow {
+  opacity: 0.15;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.menuLink:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.menuLink:hover svg {
+  transform: scale(1.1);
+}
+
+/* Link ativo */
+.menuLink.active {
+  color: var(--primary);
+  background: var(--gray-700);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.menuLink.active::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px 3px 0 0;
+  transition: all 0.3s ease;
+}
+
+/* Tooltip */
+.linkTooltip {
+  position: absolute;
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: var(--gray-700);
+  color: var(--text-default);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.6rem;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  border: 1px solid var(--gray-600);
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.menuLink:hover .linkTooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+  bottom: -2.5rem;
+}
+
+/* Tema toggle especial */
+.themeToggle {
+  position: relative;
+  margin-left: 0.4rem;
+}
+
+.themeToggle::after {
+  content: '';
+  position: absolute;
+  left: -0.6rem;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--gray-600);
+}
+
+.themeToggle svg {
+  animation: rotate 0.5s ease;
+}
+
+/* Efeito de clique */
+.menuLink:active {
+  transform: scale(0.95);
+}
+
+/* Estados de foco para acessibilidade */
+.menuLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Animações */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .menu {
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .menuLink {
+    padding: 1rem;
+  }
+
+  .menuLink svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .linkTooltip {
+    display: none; /* Esconde tooltips em mobile */
+  }
+
+  .themeToggle::after {
+    left: -0.4rem;
+  }
+}
+
+/* Versão para telas muito pequenas */
+@media (max-width: 480px) {
+  .menu {
+    gap: 0.4rem;
+    padding: 0.6rem;
+  }
+
+  .menuLink {
+    padding: 0.8rem;
+  }
 }

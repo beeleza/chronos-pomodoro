@@ -1,12 +1,118 @@
-.container-fluid {
-  max-width: auto;
-}
-
-.container {
-  max-width: 98rem;
+.containerWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
+/* Tamanhos de container */
+.sm {
+  max-width: 64rem; /* 640px */
+}
+
+.md {
+  max-width: 98rem; /* 980px - tamanho padrão */
+}
+
+.lg {
+  max-width: 120rem; /* 1200px */
+}
+
+.xl {
+  max-width: 140rem; /* 1400px */
+}
+
+.full {
+  max-width: 100%;
+  padding: 0;
+}
+
+/* Conteúdo principal */
 .content {
-  margin: 3.2rem;
+  position: relative;
+  z-index: 2;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: transparent; /* Remove o fundo */
+  border-radius: 2.4rem;
+  transition: all 0.3s ease;
+  color: var(--text-default);
+}
+
+.noPadding {
+  padding: 0;
+}
+
+/* Versão fluid */
+.fluid {
+  composes: content;
+  max-width: 100%;
+  margin: 0;
+  border-radius: 0;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  color: var(--text-default);
+}
+
+.content p {
+  color: var(--text-muted);
+}
+
+.content a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.content a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .containerWrapper {
+    padding: 0 1rem;
+  }
+
+  .content {
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border-radius: 1.6rem;
+  }
+
+  .decorLeft,
+  .decorRight {
+    width: 40px;
+    opacity: 0.05;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1rem;
+    margin: 0.5rem auto;
+  }
+
+  .decorLeft,
+  .decorRight {
+    display: none;
+  }
+}
+
+/* Tema light */
+:root[data-theme='light'] .decorLeft,
+:root[data-theme='light'] .decorRight {
+  background: linear-gradient(90deg, var(--primary-dark), transparent);
+  opacity: 0.08;
+}
+
+:root[data-theme='light'] .decorRight {
+  background: linear-gradient(-90deg, var(--primary-dark), transparent);
+}
+
+:root[data-theme='light'] .decorCircle {
+  background: var(--primary-dark);
+  opacity: 0.2;
 }
